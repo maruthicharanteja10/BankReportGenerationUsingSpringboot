@@ -20,14 +20,14 @@
 			<table>
 				<tr>
 					<td>PlanName :</td>
-	 				<td><form:select path="planName">
+					<td><form:select path="planName">
 							<form:option value="">-select-</form:option>
-							<form:options items="${names}"/>
+							<form:options items="${names}" />
 						</form:select></td>
 					<td>PlanStatus :</td>
 					<td><form:select path="planStatus">
 							<form:option value="">-select-</form:option>
-							<form:options items="${status}"/>
+							<form:options items="${status}" />
 						</form:select></td>
 					<td>Gender :</td>
 					<td><form:select path="Gender">
@@ -43,14 +43,30 @@
 					<td><form:input type="Date" path="endDate" /></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Search" class="btn btn-primary " /></td>
+					<td><input type="submit" value="Search"
+						class="btn btn-primary " /></td>
 				</tr>
 			</table>
 		</form:form>
-		<hr/>
-		<hr/>
-		Export :   <a href="" class="btn btn-secondary pb-1 pt-1">Excel</a> <a href=""
-			class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
+		<hr />
+		<table class="table table-striped table-dark">
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Holder Name</td>
+					<td>Plan Name</td>
+					<td>Plan Status</td>
+					<td>Start Date</td>
+					<td>End Date</td>
+				</tr>
+			</thead>
+			<tbody>
+			
+			</tbody>
+		</table>
+		<hr />
+		Export : <a href="" class="btn btn-secondary pb-1 pt-1">Excel</a> <a
+			href="" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
 	</div>
 
 </body>
