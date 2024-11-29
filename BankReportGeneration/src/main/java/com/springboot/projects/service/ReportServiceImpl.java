@@ -28,10 +28,7 @@ public class ReportServiceImpl implements ReportService {
 		return planRepository.getAllPlanStatus();
 	}
 
-	@Override
-	public List<String> getGender() {
-		return planRepository.getAllGender();
-	}
+
 
 	@Override
 	public List<CitizenPlan> getsearchrequest(SearchRequest request) {

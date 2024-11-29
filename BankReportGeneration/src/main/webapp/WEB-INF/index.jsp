@@ -34,7 +34,8 @@
 					<td>Gender :</td>
 					<td><form:select path="gender">
 							<form:option value="">-select-</form:option>
-							<form:options items="${gender}" />
+							<form:option value="Male" />
+							<form:option value="FeMale" />
 						</form:select></td>
 				</tr>
 				<tr>

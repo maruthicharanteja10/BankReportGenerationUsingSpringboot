@@ -22,7 +22,6 @@ public class ReportController {
 	private void init(Model model) {
 		model.addAttribute("names", reportService.getplanNames());
 		model.addAttribute("status", reportService.getplanstatus());
-		model.addAttribute("gender", reportService.getGender());
 	}
 
 	@GetMapping("/")
