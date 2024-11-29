@@ -15,24 +15,29 @@
 </head>
 
 <body>
-	<div class="container">
-		<h2 class=" pt-3 pb-3">Bank Report Generator</h2>
+	<div>
+		<h2 class=" pt-3 pb-3 bg-dark text-white text-center">Bank Report
+			Generator</h2>
 
 		<form:form action="searchData" modelAttribute="search" method="POST">
-			<table>
+			<table class="container mb-5 mt-4">
 				<tr>
 					<td>PlanName :</td>
-					<td><form:select path="planName">
+					<td><form:select path="planName" class="form-control">
 							<form:option value="">-select-</form:option>
 							<form:options items="${names}" />
 						</form:select></td>
+				</tr>
+				<tr>
 					<td>PlanStatus :</td>
-					<td><form:select path="planStatus">
+					<td><form:select path="planStatus" class="form-control">
 							<form:option value="">-select-</form:option>
 							<form:options items="${status}" />
 						</form:select></td>
+				</tr>
+				<tr>
 					<td>Gender :</td>
-					<td><form:select path="gender">
+					<td><form:select path="gender" class="form-control">
 							<form:option value="">-select-</form:option>
 							<form:option value="Male" />
 							<form:option value="FeMale" />
@@ -40,19 +45,23 @@
 				</tr>
 				<tr>
 					<td>StartDate:</td>
-					<td><form:input type="Date" path="startDate" /></td>
+					<td><form:input type="Date" path="startDate"
+							class="form-control" /></td>
 					<td>EndDate:</td>
-					<td><form:input type="Date" path="endDate" /></td>
+					<td><form:input type="Date" path="endDate"
+							class="form-control" /></td>
 				</tr>
+				
 				<tr>
 					<td><a href="/" class="btn btn-secondary">Reset</a></td>
 					<td><input type="submit" value="Search"
 						class="btn btn-primary " /></td>
 				</tr>
+
 			</table>
 		</form:form>
 		<hr />
-		<table class="table table-striped table-hover">
+		<table class="table table-striped table-hover container">
 			<thead class="table-dark">
 				<tr>
 					<td>ID</td>
@@ -86,8 +95,11 @@
 		</table>
 
 		<hr />
-		Export : <a href="" class="btn btn-secondary pb-1 pt-1">Excel</a> <a
-			href="" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
+		<div class="container">
+			Export : <a href="" class="btn btn-secondary pb-1 pt-1">Excel</a> <a
+				href="" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
+		</div>
+
 	</div>
 
 </body>
