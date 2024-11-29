@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
 	<div class="container">
 		<h2 class=" pt-3 pb-3">Bank Report Generator</h2>
 
-		<form:form action="search" modelAttribute="request" method="POST">
+		<form:form action="search" modelAttribute="search" method="POST">
 			<table>
 				<tr>
 					<td>PlanName :</td>
@@ -31,10 +32,9 @@
 							<form:options items="${status}" />
 						</form:select></td>
 					<td>Gender :</td>
-					<td><form:select path="Gender">
+					<td><form:select path="gender">
 							<form:option value="">-select-</form:option>
-							<form:option value="">Male</form:option>
-							<form:option value="">Female</form:option>
+							<form:options items="${gender}" />
 						</form:select></td>
 				</tr>
 				<tr>
@@ -44,28 +44,32 @@
 					<td><form:input type="Date" path="endDate" /></td>
 				</tr>
 				<tr>
+					<td><a href="/" class="btn btn-secondary">Reset</a></td>
 					<td><input type="submit" value="Search"
 						class="btn btn-primary " /></td>
 				</tr>
 			</table>
 		</form:form>
 		<hr />
-		<table class="table table-striped table-dark">
-			<thead>
+		<table class="table table-striped table-hover">
+			<thead class="table-dark">
 				<tr>
 					<td>ID</td>
 					<td>Holder Name</td>
+					<td>Gender</td>
 					<td>Plan Name</td>
 					<td>Plan Status</td>
 					<td>Start Date</td>
 					<td>End Date</td>
+					<td>BenifitAmt</td>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${plans}" var="plan" varStatus="index">
 					<tr>
 						<td>${index.count}</td>
-						<td>${plan.citizenName}"</td>
+						<td>${plan.citizenName}</td>
+						<td>${plan.gender}</td>
 						<td>${plan.planName}</td>
 						<td>${plan.planStatus}</td>
 						<td>${plan.planStartDate}</td>
@@ -74,8 +78,12 @@
 
 					</tr>
 				</c:forEach>
+				<c:if test="${empty plans }">
+					<td colspan="8" style="text-align: center">No records Found</td>
+				</c:if>
 			</tbody>
 		</table>
+
 		<hr />
 		Export : <a href="" class="btn btn-secondary pb-1 pt-1">Excel</a> <a
 			href="" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>

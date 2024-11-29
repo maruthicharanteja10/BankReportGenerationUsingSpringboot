@@ -10,6 +10,8 @@ public interface ReportService {
 
 	public List<String> getplanstatus();
 
+	public List<String> getGender();
+
 	public List<CitizenPlan> getsearchrequest(SearchRequest request);
 
 	public boolean exportExcel();

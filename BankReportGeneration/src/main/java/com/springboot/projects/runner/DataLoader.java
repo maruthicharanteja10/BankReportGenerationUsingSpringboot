@@ -128,7 +128,7 @@ public class DataLoader implements ApplicationRunner {
 		CitizenPlan c13 = new CitizenPlan();
 		c13.setCitizenName("Ashok");
 		c13.setGender("Male");
-		c13.setPlanName("Cash");
+		c13.setPlanName("Employement");
 		c13.setPlanStatus("Approved");
 		c13.setPlanStartDate(LocalDate.now().minusMonths(1));
 		c13.setPlanEndDate(LocalDate.now().plusMonths(5));

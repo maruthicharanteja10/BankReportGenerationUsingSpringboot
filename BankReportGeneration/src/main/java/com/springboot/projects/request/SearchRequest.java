@@ -15,4 +15,5 @@ public class SearchRequest {
 	private LocalDate startDate;
 	private LocalDate endDate;
 
+
 }
