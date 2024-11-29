@@ -32,7 +32,7 @@ public class ReportController {
 		return "index";
 	}
 
-	@PostMapping("/search")
+	@PostMapping("/searchData")
 	public String searchdata(@ModelAttribute("search") SearchRequest search, Model model) {
 		System.out.println(search);
 		List<CitizenPlan> plans = reportService.getsearchrequest(search);

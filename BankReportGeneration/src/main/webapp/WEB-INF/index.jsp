@@ -18,7 +18,7 @@
 	<div class="container">
 		<h2 class=" pt-3 pb-3">Bank Report Generator</h2>
 
-		<form:form action="search" modelAttribute="search" method="POST">
+		<form:form action="searchData" modelAttribute="search" method="POST">
 			<table>
 				<tr>
 					<td>PlanName :</td>
