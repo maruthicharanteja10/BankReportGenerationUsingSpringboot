@@ -47,6 +47,18 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.3.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.librepdf/openpdf -->
+		<dependency>
+			<groupId>com.github.librepdf</groupId>
+			<artifactId>openpdf</artifactId>
+			<version>2.0.3</version>
+		</dependency>
 
 		<!-- Jakarta JSP API -->
 		<dependency>

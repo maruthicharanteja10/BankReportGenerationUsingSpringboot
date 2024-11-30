@@ -96,8 +96,8 @@
 
 		<hr />
 		<div class="container">
-			Export : <a href="" class="btn btn-secondary pb-1 pt-1">Excel</a> <a
-				href="" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
+			Export : <a href="/excel" class="btn btn-secondary pb-1 pt-1">Excel</a> <a
+				href="/pdf" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
 		</div>
 
 	</div>

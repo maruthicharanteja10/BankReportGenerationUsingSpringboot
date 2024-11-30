@@ -1,7 +1,6 @@
 package com.springboot.projects.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +13,25 @@ import com.springboot.projects.request.SearchRequest;
 import com.springboot.projects.service.ReportService;
 import com.springboot.projects.service.ReportServiceImpl;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class ReportController {
 	@Autowired
 	private ReportServiceImpl reportService;
+
+	@GetMapping("/excel")
+	public void excelExport(HttpServletResponse response) throws Exception {
+		response.setContentType("application/octet-stream");
+		response.addHeader("Content-Disposition", "attachment;filename=plans.xls");
+		reportService.exportExcel(response);
+	}
+	@GetMapping("/pdf")
+	public void pdfExport(HttpServletResponse response) throws Exception {
+		response.setContentType("application/octet-stream");
+		response.addHeader("Content-Disposition", "attachment;filename=plans.pdf");
+		reportService.exportPdf(response);
+	}
 
 	private void init(Model model) {
 		model.addAttribute("names", reportService.getplanNames());
@@ -36,7 +50,7 @@ public class ReportController {
 		System.out.println(search);
 		List<CitizenPlan> plans = reportService.getsearchrequest(search);
 		model.addAttribute("plans", plans);
-		//model.addAttribute("search", search);
+		// model.addAttribute("search", search);
 		init(model);
 		return "index";
 
