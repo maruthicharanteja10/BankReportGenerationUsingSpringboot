@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -23,17 +24,28 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.springboot.projects.entity.CitizenPlan;
 import com.springboot.projects.repository.CitizenPlanRepository;
 import com.springboot.projects.request.SearchRequest;
+import com.springboot.projects.util.EmailUtils;
+import com.springboot.projects.util.ExcelGenerator;
+import com.springboot.projects.util.PdfGenerator;
 
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class ReportServiceImpl implements ReportService {
+	@Autowired
 	private CitizenPlanRepository planRepository;
+	@Autowired
+	private ExcelGenerator excelGenerator;
+	@Autowired
+	private PdfGenerator pdfGenerator;
+	@Autowired
+	private EmailUtils emailUtils;
 
 	public ReportServiceImpl(CitizenPlanRepository planRepository) {
 		super();
 		this.planRepository = planRepository;
+
 	}
 
 	@Override
@@ -76,88 +88,29 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public boolean exportExcel(HttpServletResponse response) throws Exception {
+		File f = new File("plans.xls");
+		List<CitizenPlan> plans = planRepository.findAll();
+		excelGenerator.generate(response, plans, f);
+		String subject = "Test mail subject";
+		String body = "<h1>Test mail body</h1>";
+		String to = "charantejadonthireddy@gmail.com";
 
-		Workbook workbook = new HSSFWorkbook();
-		// Workbook workbook2=new XSSFWorkbook();
-		Sheet sheet = workbook.createSheet("plans-Data");
-		Row headerrow = sheet.createRow(0);
-		headerrow.createCell(0).setCellValue("ID");
-		headerrow.createCell(1).setCellValue("Citizen Name");
-		headerrow.createCell(2).setCellValue("Gender");
-		headerrow.createCell(3).setCellValue("PlanName");
-		headerrow.createCell(4).setCellValue("PlanStatus");
-		headerrow.createCell(5).setCellValue("StartDate");
-		headerrow.createCell(6).setCellValue("EndDate");
-		headerrow.createCell(7).setCellValue("BenfitAmt");
-
-		List<CitizenPlan> records = planRepository.findAll();
-		int rowdataindex = 1;
-		for (CitizenPlan plan : records) {
-			Row datarow = sheet.createRow(rowdataindex);
-			datarow.createCell(0).setCellValue(plan.getCitizenId());
-			datarow.createCell(1).setCellValue(plan.getCitizenName());
-			datarow.createCell(2).setCellValue(plan.getGender());
-			datarow.createCell(3).setCellValue(plan.getPlanName());
-			datarow.createCell(4).setCellValue(plan.getPlanStatus());
-			if (null != plan.getPlanStartDate()) {
-				datarow.createCell(5).setCellValue(plan.getPlanStartDate() + "");
-			} else {
-				datarow.createCell(5).setCellValue("N/A");
-			}
-			if (null != plan.getPlanEndDate()) {
-				datarow.createCell(6).setCellValue(plan.getPlanEndDate() + "");
-			} else {
-				datarow.createCell(6).setCellValue("N/A");
-			}
-			datarow.createCell(7).setCellValue(plan.getBenfitAmt());
-			rowdataindex++;
-		}
-		FileOutputStream fos = new FileOutputStream(new File("plans.xls"));
-		workbook.write(fos);
-		workbook.close();
-
-		ServletOutputStream outputStream = response.getOutputStream();
-		workbook.write(outputStream);
-		return false;
+		emailUtils.sendEmail(subject, body, to, f);
+		f.delete();
+		return true;
 	}
 
 	@Override
 	public boolean exportPdf(HttpServletResponse response) throws Exception {
-		Document document = new Document(PageSize.A3);
-		PdfWriter.getInstance(document, response.getOutputStream());
-		document.open();
-		// creating font
-		// setting font style and size
-		Font fontTitle = FontFactory.getFont(FontFactory.TIMES_BOLD);
-		fontTitle.setSize(20);
-		Paragraph p = new Paragraph("CitizenPlans", fontTitle);
-		p.setAlignment(p.ALIGN_CENTER);
-		document.add(p);
+		File f = new File("plans.pdf");
+		List<CitizenPlan> plans = planRepository.findAll();
+		pdfGenerator.generate(response, plans, f);
+		String subject = "Test mail subject";
+		String body = "<h1>Test mail body</h1>";
+		String to = "charantejadonthireddy@gmail.com";
 
-		PdfPTable table = new PdfPTable(8);
-		table.setSpacingBefore(5);
-		table.addCell("ID");
-		table.addCell("Citizen Name");
-		table.addCell("Gender");
-		table.addCell("PlanName");
-		table.addCell("PlanStatus");
-		table.addCell("StartDate");
-		table.addCell("EndDate");
-		table.addCell("BenfitAmt");
-
-		List<CitizenPlan> records = planRepository.findAll();
-		for (CitizenPlan plan : records) {
-			table.addCell(String.valueOf(plan.getCitizenId()));
-			table.addCell(plan.getCitizenName());
-			table.addCell(plan.getGender());
-			table.addCell(plan.getPlanName());
-			table.addCell(plan.getPlanStatus());
-			table.addCell(plan.getPlanStartDate() + "");
-			table.addCell(plan.getPlanEndDate() + "");
-			table.addCell(plan.getBenfitAmt() + "");
-		}
-		document.add(table);
-		document.close();
+		emailUtils.sendEmail(subject, body, to, f);
+		f.delete();
 		return true;
 	}
 

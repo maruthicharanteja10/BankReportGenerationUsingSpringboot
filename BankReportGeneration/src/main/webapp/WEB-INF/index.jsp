@@ -16,6 +16,7 @@
 
 <body>
 	<div>
+
 		<h2 class=" pt-3 pb-3 bg-dark text-white text-center">Bank Report
 			Generator</h2>
 
@@ -51,7 +52,7 @@
 					<td><form:input type="Date" path="endDate"
 							class="form-control" /></td>
 				</tr>
-				
+
 				<tr>
 					<td><a href="/" class="btn btn-secondary">Reset</a></td>
 					<td><input type="submit" value="Search"
@@ -95,9 +96,10 @@
 		</table>
 
 		<hr />
+
 		<div class="container">
-			Export : <a href="/excel" class="btn btn-secondary pb-1 pt-1">Excel</a> <a
-				href="/pdf" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
+			Export : <a href="/excel" class="btn btn-secondary pb-1 pt-1">Excel</a>
+			<a href="/pdf" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
 		</div>
 
 	</div>

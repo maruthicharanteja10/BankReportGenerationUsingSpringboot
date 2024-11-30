@@ -24,7 +24,7 @@ public class CitizenPlan {
 	private String planStatus;
 	private LocalDate planStartDate;
 	private LocalDate planEndDate;
-	private double benfitAmt;
+	private Double benfitAmt;
 	private String denialRsn;
 	private LocalDate terminatedDate;
 	private String terminationRsn;

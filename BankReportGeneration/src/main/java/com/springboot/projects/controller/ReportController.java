@@ -21,13 +21,14 @@ public class ReportController {
 	private ReportServiceImpl reportService;
 
 	@GetMapping("/excel")
-	public void excelExport(HttpServletResponse response) throws Exception {
+	public void excelExport(HttpServletResponse response, Model model) throws Exception {
 		response.setContentType("application/octet-stream");
 		response.addHeader("Content-Disposition", "attachment;filename=plans.xls");
 		reportService.exportExcel(response);
 	}
+
 	@GetMapping("/pdf")
-	public void pdfExport(HttpServletResponse response) throws Exception {
+	public void pdfExport(HttpServletResponse response, Model model) throws Exception {
 		response.setContentType("application/octet-stream");
 		response.addHeader("Content-Disposition", "attachment;filename=plans.pdf");
 		reportService.exportPdf(response);
