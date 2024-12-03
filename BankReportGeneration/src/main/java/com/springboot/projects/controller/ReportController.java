@@ -53,7 +53,7 @@ public class ReportController {
 		model.addAttribute("plans", plans);
 		// model.addAttribute("search", search);
 		init(model);
-		return "index";
+		return "index2";
 
 	}
 }

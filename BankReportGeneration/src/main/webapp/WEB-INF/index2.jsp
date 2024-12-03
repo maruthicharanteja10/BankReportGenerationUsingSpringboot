@@ -19,10 +19,10 @@
 </style>
 </head>
 
-<body class="img-responsive"
-	style="background-image:url(<c:url value='/img/img-1.png' />);  background-size: cover;">
-	<h2 class="text-center pb-3 pt-3 text-white sticky-top img-responsive"
-		style="background-image:url(<c:url value='/img/bg.jpg' />);">Bank
+<body class=" img-responsive"
+	style="background-image:url(<c:url value='/img/img-1.png' />) ; background-size:1400px ">
+	<h2 class="text-center pb-3 pt-3 text-white sticky-top img-responsive "
+		style="background-image:url(<c:url value='/img/bg.jpg' />); ">Bank
 		Report Generator</h2>
 	<br>
 	<div class="container">
@@ -70,8 +70,49 @@
 					type="submit" value="Search" class="btn btn-primary btn-custom" />
 			</div>
 		</form:form>
+		<br>
+		<div class="table-responsive container">
+			<table class="table table-striped table-hover table-sm">
+				<thead class="table-dark">
+					<tr>
+						<th>ID</th>
+						<th>Holder Name</th>
+						<th>Gender</th>
+						<th>Plan Name</th>
+						<th>Plan Status</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Benefit Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${plans}" var="plan" varStatus="index">
+						<tr>
+							<td>${index.count}</td>
+							<td>${plan.citizenName}</td>
+							<td>${plan.gender}</td>
+							<td>${plan.planName}</td>
+							<td>${plan.planStatus}</td>
+							<td>${plan.planStartDate}</td>
+							<td>${plan.planEndDate}</td>
+							<td>${plan.benfitAmt}</td>
+						</tr>
+					</c:forEach>
+					<c:if test="${empty plans}">
+						<tr>
+							<td colspan="8" class="text-center">No records found</td>
+						</tr>
+					</c:if>
+				</tbody>
+			</table>
+		</div>
+		<div class="text-center">
+			<a href="/excel" class="btn btn-success ">Export to Excel</a> <a
+				href="/pdf" class="btn btn-danger">Export to PDF</a>
+		</div>
 
 
 	</div>
+	<br>
 </body>
 </html>
