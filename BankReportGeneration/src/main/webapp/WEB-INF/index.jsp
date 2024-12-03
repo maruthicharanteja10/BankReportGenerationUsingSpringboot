@@ -12,97 +12,111 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
+<style>
+.container {
+	background-color: #B3C8CF;
+	background-size: cover;
+	padding: 20px;
+	border-radius: 15px;
+}
+</style>
 </head>
 
 <body>
-	<div>
+	<h2 class="text-center bg-dark  pb-3 pt-3 text-white sticky-top">Bank
+		Report Generator</h2>
+	<br>
+	<div class="container">
 
-		<h2 class=" pt-3 pb-3 bg-dark text-white text-center">Bank Report
-			Generator</h2>
-
+		<br>
 		<form:form action="searchData" modelAttribute="search" method="POST">
-			<table class="container mb-5 mt-4">
-				<tr>
-					<td>PlanName :</td>
-					<td><form:select path="planName" class="form-control">
-							<form:option value="">-select-</form:option>
-							<form:options items="${names}" />
-						</form:select></td>
-				</tr>
-				<tr>
-					<td>PlanStatus :</td>
-					<td><form:select path="planStatus" class="form-control">
-							<form:option value="">-select-</form:option>
-							<form:options items="${status}" />
-						</form:select></td>
-				</tr>
-				<tr>
-					<td>Gender :</td>
-					<td><form:select path="gender" class="form-control">
-							<form:option value="">-select-</form:option>
-							<form:option value="Male" />
-							<form:option value="FeMale" />
-						</form:select></td>
-				</tr>
-				<tr>
-					<td>StartDate:</td>
-					<td><form:input type="Date" path="startDate"
-							class="form-control" /></td>
-					<td>EndDate:</td>
-					<td><form:input type="Date" path="endDate"
-							class="form-control" /></td>
-				</tr>
+			<div class="row mb-4">
+				<div class="col-md-6">
+					<label for="planName" class="form-label">Plan Name:</label>
+					<form:select path="planName" class="form-control" id="planName">
+						<form:option value="">-select-</form:option>
+						<form:options items="${names}" />
+					</form:select>
+				</div>
+				<div class="col-md-6">
+					<label for="planStatus" class="form-label">Plan Status:</label>
+					<form:select path="planStatus" class="form-control" id="planStatus">
+						<form:option value="">-select-</form:option>
+						<form:options items="${status}" />
+					</form:select>
+				</div>
+			</div>
 
-				<tr>
-					<td><a href="/" class="btn btn-secondary">Reset</a></td>
-					<td><input type="submit" value="Search"
-						class="btn btn-primary " /></td>
-				</tr>
+			<div class="row mb-4">
+				<div class="col-md-6">
+					<label for="gender" class="form-label">Gender:</label>
+					<form:select path="gender" class="form-control" id="gender">
+						<form:option value="">-select-</form:option>
+						<form:option value="Male">Male</form:option>
+						<form:option value="Female">Female</form:option>
+					</form:select>
+				</div>
+				<div class="col-md-3">
+					<label class="form-label">Start Date:</label>
+					<form:input type="date" path="startDate" class="form-control"
+						id="startDate" />
+				</div>
+				<div class="col-md-3">
+					<label class="form-label">End Date:</label>
+					<form:input type="date" path="endDate" class="form-control"
+						id="endDate" />
+				</div>
+			</div>
 
-			</table>
+			<div class="text-center">
+				<a href="/" class="btn btn-secondary btn-custom">Reset</a> <input
+					type="submit" value="Search" class="btn btn-primary btn-custom" />
+			</div>
 		</form:form>
+
+
 		<hr />
-		<table class="table table-striped table-hover container">
-			<thead class="table-dark">
-				<tr>
-					<td>ID</td>
-					<td>Holder Name</td>
-					<td>Gender</td>
-					<td>Plan Name</td>
-					<td>Plan Status</td>
-					<td>Start Date</td>
-					<td>End Date</td>
-					<td>BenifitAmt</td>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${plans}" var="plan" varStatus="index">
+
+		<div class="table-responsive">
+			<table class="table table-striped table-hover">
+				<thead class="table-dark">
 					<tr>
-						<td>${index.count}</td>
-						<td>${plan.citizenName}</td>
-						<td>${plan.gender}</td>
-						<td>${plan.planName}</td>
-						<td>${plan.planStatus}</td>
-						<td>${plan.planStartDate}</td>
-						<td>${plan.planEndDate}</td>
-						<td>${plan.benfitAmt}</td>
-
+						<th>ID</th>
+						<th>Holder Name</th>
+						<th>Gender</th>
+						<th>Plan Name</th>
+						<th>Plan Status</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Benefit Amount</th>
 					</tr>
-				</c:forEach>
-				<c:if test="${empty plans }">
-					<td colspan="8" style="text-align: center">No records Found</td>
-				</c:if>
-			</tbody>
-		</table>
-
-		<hr />
-
-		<div class="container">
-			Export : <a href="/excel" class="btn btn-secondary pb-1 pt-1">Excel</a>
-			<a href="/pdf" class="btn btn-secondary pb-1 pt-1 ">Pdf</a>
+				</thead>
+				<tbody>
+					<c:forEach items="${plans}" var="plan" varStatus="index">
+						<tr>
+							<td>${index.count}</td>
+							<td>${plan.citizenName}</td>
+							<td>${plan.gender}</td>
+							<td>${plan.planName}</td>
+							<td>${plan.planStatus}</td>
+							<td>${plan.planStartDate}</td>
+							<td>${plan.planEndDate}</td>
+							<td>${plan.benfitAmt}</td>
+						</tr>
+					</c:forEach>
+					<c:if test="${empty plans}">
+						<tr>
+							<td colspan="8" class="text-center">No records found</td>
+						</tr>
+					</c:if>
+				</tbody>
+			</table>
 		</div>
 
+		<div class="text-center">
+			<a href="/excel" class="btn btn-success ">Export to Excel</a> <a
+				href="/pdf" class="btn btn-danger">Export to PDF</a>
+		</div>
 	</div>
-
 </body>
 </html>

@@ -133,7 +133,6 @@ public class DataLoader implements ApplicationRunner {
 		c13.setPlanStartDate(LocalDate.now().minusMonths(1));
 		c13.setPlanEndDate(LocalDate.now().plusMonths(5));
 		c13.setBenfitAmt(9500.00);
-	
 
 		CitizenPlan c14 = new CitizenPlan();
 		c14.setCitizenName("Lata");
